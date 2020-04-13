@@ -1,3 +1,4 @@
+[![Build Status](https://dev.azure.com/ravinderkadiyan/mkadiyan/_apis/build/status/mKadiyan.pipelines-java?branchName=master)](https://dev.azure.com/ravinderkadiyan/mkadiyan/_build/latest?definitionId=1&branchName=master)
 
 # Contributing
 
