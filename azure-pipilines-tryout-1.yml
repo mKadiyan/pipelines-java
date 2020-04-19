@@ -42,40 +42,40 @@ stages:
     - bash: echo "PROD -> C2 -> step1"
     - bash: echo "PROD -> C2 -> step2"
 
-- stage: AFTER-PROD
+- stage: AFTER_PROD
   dependsOn: PROD
   jobs:
   - job:  D1
     steps:
-    - bash: echo "AFTER-PROD -> D1 -> step1"
-    - bash: echo "AFTER-PROD -> D1 -> step2"
+    - bash: echo "AFTER_PROD -> D1 -> step1"
+    - bash: echo "AFTER_PROD -> D1 -> step2"
   - job:  D2
     steps:
-    - bash: echo "AFTER-PROD -> D2 -> step1"
-    - bash: echo "AFTER-PROD -> D2 -> step2"
+    - bash: echo "AFTER_PROD -> D2 -> step1"
+    - bash: echo "AFTER_PROD -> D2 -> step2"
 
-- stage: AFTER-QA-SUCCESS
+- stage: AFTER_QA_SUCCESS
   dependsOn: PROD
   condition: succeeded('QA')
   jobs:
   - job:  D1
     steps:
-    - bash: echo "AFTER-QA-SUCCESS -> D1 -> step1"
-    - bash: echo "AFTER-QA-SUCCESS -> D1 -> step2"
+    - bash: echo "AFTER_QA_SUCCESS -> D1 -> step1"
+    - bash: echo "AFTER_QA_SUCCESS -> D1 -> step2"
   - job:  D2
     steps:
-    - bash: echo "AFTER-QA-SUCCESS -> D2 -> step1"
-    - bash: echo "AFTER-QA-SUCCESS -> D2 -> step2"
+    - bash: echo "AFTER_QA_SUCCESS -> D2 -> step1"
+    - bash: echo "AFTER_QA_SUCCESS -> D2 -> step2"
 
-- stage: AFTER-QA-FAILURE
+- stage: AFTER_QA_FAILURE
   dependsOn: PROD
   condition: failed('QA')
   jobs:
   - job:  D1
     steps:
-    - bash: echo "AFTER-QA-FAILURE -> D1 -> step1"
-    - bash: echo "AFTER-QA-FAILURE -> D1 -> step2"
+    - bash: echo "AFTER_QA_FAILURE -> D1 -> step1"
+    - bash: echo "AFTER_QA_FAILURE -> D1 -> step2"
   - job:  D2
     steps:
-    - bash: echo "AFTER-QA-FAILURE -> D2 -> step1"
-    - bash: echo "AFTER-QA-FAILURE -> D2 -> step2"
+    - bash: echo "AFTER_QA_FAILURE -> D2 -> step1"
+    - bash: echo "AFTER_QA_FAILURE -> D2 -> step2"
