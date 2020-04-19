@@ -4,10 +4,12 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 trigger:
-- master
-paths:
-  exclude:
-  - azure-pipilines-tryout.yml
+  branches:
+      include:
+      - master/*
+  paths:
+      exclude:
+      - azure-pipilines-tryout.yml
 pool:
   vmImage: 'macos-latest'
 

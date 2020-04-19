@@ -1,8 +1,10 @@
 trigger:
-    - master
-paths:
-    include:
-    - azure-pipilines-tryout.yml
+    branches:
+        include:
+        - master/*
+    paths:
+        include:
+        - azure-pipilines-tryout.yml
 pool:
     vmImage: 'ubuntu-16.04'
   
