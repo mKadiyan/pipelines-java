@@ -3,8 +3,8 @@ trigger:
 pool:
     vmImage: 'ubuntu-16.04'
   
-  container: ubuntu:16.04
+container: ubuntu:16.04
   
-  steps:
+steps:
   - bash: echo "start of step"
   - script: printenv
