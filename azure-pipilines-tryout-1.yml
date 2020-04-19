@@ -7,61 +7,75 @@ trigger:
         - azure-pipilines-tryout-1.yml
 pool:
     vmImage: 'ubuntu-16.04'
- stages:
-    - stage: DEV
-      jobs:
-      - job: A1
-        steps:
-        - bash: echo "DEV -> A1 -> step1"
-        - bash: echo "DEV -> A1 -> step2"
-      - job: A2
-        steps:
-        - bash: echo "DEV -> A2 -> step1"
-        - bash: echo "DEV -> A2 -> step2"
     
-    - stage: QA
-      jobs:
-      - job: B1
-        steps:
-        - bash: echo "QA -> B1 -> step1"      
-        - bash: echo "QA -> B1 -> step2"      
-      - job: B2
-        steps:
-        - bash: echo "QA -> B2 -> step1"      
-        - bash: echo "QA -> B2 -> step2"      
+stages:
+- stage: DEV
+    jobs:
+    - job: A1
+    steps:
+    - bash: echo "DEV -> A1 -> step1"
+    - bash: echo "DEV -> A1 -> step2"
+    - job: A2
+    steps:
+    - bash: echo "DEV -> A2 -> step1"
+    - bash: echo "DEV -> A2 -> step2"
 
-    - stage: PROD
-      jobs:
-      - job:  C1
-        steps:
-        - bash: echo "PROD -> C1 -> step1"
-        - bash: echo "PROD -> C1 -> step2"
-      - job:  C2
-        steps:
-        - bash: echo "PROD -> C2 -> step1"
-        - bash: echo "PROD -> C2 -> step2"
+- stage: QA
+    jobs:
+    - job: B1
+    steps:
+    - bash: echo "QA -> B1 -> step1"      
+    - bash: echo "QA -> B1 -> step2"      
+    - job: B2
+    steps:
+    - bash: echo "QA -> B2 -> step1"      
+    - bash: echo "QA -> B2 -> step2"      
 
-    - stage: AFTER-PROD
-      dependsOn: PROD
-      jobs:
-      - job:  D1
-        steps:
-        - bash: echo "AFTER-PROD -> D1 -> step1"
-        - bash: echo "AFTER-PROD -> D1 -> step2"
-      - job:  D2
-        steps:
-        - bash: echo "AFTER-PROD -> D2 -> step1"
-        - bash: echo "AFTER-PROD -> D2 -> step2"
+- stage: PROD
+    jobs:
+    - job:  C1
+    steps:
+    - bash: echo "PROD -> C1 -> step1"
+    - bash: echo "PROD -> C1 -> step2"
+    - job:  C2
+    steps:
+    - bash: echo "PROD -> C2 -> step1"
+    - bash: echo "PROD -> C2 -> step2"
 
-    - stage: AFTER-QA-SUCCESS
-      dependsOn: PROD
-      condition: succeeded('B')
-      jobs:
-      - job:  D1
-        steps:
-        - bash: echo "AFTER-QA-SUCCESS -> D1 -> step1"
-        - bash: echo "AFTER-QA-SUCCESS -> D1 -> step2"
-      - job:  D2
-        steps:
-        - bash: echo "AFTER-QA-SUCCESS -> D2 -> step1"
-        - bash: echo "AFTER-QA-SUCCESS -> D2 -> step2"
+- stage: AFTER-PROD
+    dependsOn: PROD
+    jobs:
+    - job:  D1
+    steps:
+    - bash: echo "AFTER-PROD -> D1 -> step1"
+    - bash: echo "AFTER-PROD -> D1 -> step2"
+    - job:  D2
+    steps:
+    - bash: echo "AFTER-PROD -> D2 -> step1"
+    - bash: echo "AFTER-PROD -> D2 -> step2"
+
+- stage: AFTER-QA-SUCCESS
+    dependsOn: PROD
+    condition: succeeded('QA')
+    jobs:
+    - job:  D1
+    steps:
+    - bash: echo "AFTER-QA-SUCCESS -> D1 -> step1"
+    - bash: echo "AFTER-QA-SUCCESS -> D1 -> step2"
+    - job:  D2
+    steps:
+    - bash: echo "AFTER-QA-SUCCESS -> D2 -> step1"
+    - bash: echo "AFTER-QA-SUCCESS -> D2 -> step2"
+
+- stage: AFTER-QA-FAILURE
+    dependsOn: PROD
+    condition: failed('QA')
+    jobs:
+    - job:  D1
+    steps:
+    - bash: echo "AFTER-QA-FAILURE -> D1 -> step1"
+    - bash: echo "AFTER-QA-FAILURE -> D1 -> step2"
+    - job:  D2
+    steps:
+    - bash: echo "AFTER-QA-FAILURE -> D2 -> step1"
+    - bash: echo "AFTER-QA-FAILURE -> D2 -> step2"
