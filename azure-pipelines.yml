@@ -7,7 +7,7 @@ trigger:
 - master
 paths:
   exclude:
-    - azure-pipelines-tryout.yml
+  - azure-pipilines-tryout.yml
 pool:
   vmImage: 'macos-latest'
 
